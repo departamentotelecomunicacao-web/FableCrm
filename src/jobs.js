@@ -90,14 +90,18 @@ function startJobs() {
   const backupCron = process.env.BACKUP_CRON || '0 3 * * *';
   const notifyCron = process.env.NOTIFY_CRON || '0 * * * *';
 
-  cron.schedule(backupCron, async () => {
-    try {
-      const file = await runBackup();
-      console.log(`[backup] gerado: ${file}`);
-    } catch (err) {
-      console.error('[backup] falhou:', err.message);
-    }
-  });
+  // Em hospedagens sem pg_dump/disco persistente (ex.: Render + Neon),
+  // desative com BACKUP_ENABLED=false e use o backup nativo do provedor do banco.
+  if (process.env.BACKUP_ENABLED !== 'false') {
+    cron.schedule(backupCron, async () => {
+      try {
+        const file = await runBackup();
+        console.log(`[backup] gerado: ${file}`);
+      } catch (err) {
+        console.error('[backup] falhou:', err.message);
+      }
+    });
+  }
 
   cron.schedule(notifyCron, async () => {
     try {

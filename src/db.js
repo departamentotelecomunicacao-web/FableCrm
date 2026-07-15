@@ -1,7 +1,14 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const url = process.env.DATABASE_URL || '';
+// Bancos gerenciados (Neon, Render, Supabase…) exigem SSL; local não usa.
+const needsSSL = /sslmode=require|neon\.tech|render\.com|supabase\.co/.test(url);
+
+const pool = new Pool({
+  connectionString: url,
+  ssl: needsSSL ? { rejectUnauthorized: false } : false,
+});
 
 module.exports = {
   pool,

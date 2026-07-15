@@ -1,0 +1,33 @@
+# Blueprint do Render (https://render.com/docs/blueprint-spec)
+# Deploy: Render Dashboard -> New -> Blueprint -> selecionar este repositório.
+# Antes, crie o banco no Neon (https://neon.tech) e tenha a connection string em mãos.
+services:
+  - type: web
+    name: fablecrm
+    runtime: node
+    plan: free # atenção: no plano free o serviço hiberna após 15 min sem uso
+    region: virginia
+    buildCommand: npm ci
+    # migrate e seed são idempotentes: rodam a cada deploy sem duplicar nada
+    startCommand: npm run migrate && npm run seed && node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false # cole aqui a connection string do Neon ao criar o serviço
+      - key: JWT_SECRET
+        generateValue: true # o Render gera um segredo forte automaticamente
+      - key: JWT_EXPIRES
+        value: 8h
+      - key: BACKUP_ENABLED
+        value: "false" # backup fica por conta do Neon (restore point-in-time)
+      - key: MAX_UPLOAD_MB
+        value: "20"
+    # Para uploads persistentes (documentos/faturas), migre para o plano
+    # Starter e descomente o disco abaixo — no plano free o disco é apagado
+    # a cada deploy/reinício:
+    # disk:
+    #   name: uploads
+    #   mountPath: /opt/render/project/src/uploads
+    #   sizeGB: 1
