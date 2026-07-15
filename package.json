@@ -1,0 +1,32 @@
+{
+  "name": "fablecrm",
+  "version": "1.0.0",
+  "description": "FableCRM - CRM da Fatura Expert (gestão comercial e de telefonia)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "seed:demo": "node scripts/seed.js --demo",
+    "backup": "node scripts/backup.js",
+    "gen:icons": "node scripts/gen-icons.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:41729/git/departamentotelecomunicacao-web/FableCrm"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "node-cron": "^4.6.0",
+    "pdfkit": "^0.19.1",
+    "pg": "^8.22.0"
+  }
+}
