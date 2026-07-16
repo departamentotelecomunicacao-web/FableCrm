@@ -6,7 +6,7 @@ Views.login = (container) => {
   const box = el(`<div class="login-wrap">
     <div class="login-card">
       <img src="/icons/icon-192.png" alt="" class="login-logo">
-      <h1>FableCRM</h1>
+      <h1>Fatura Expert</h1>
       <p class="muted">CRM da Fatura Expert</p>
       <form>
         <div class="field"><label>E-mail</label><input type="email" name="email" required autocomplete="username"></div>
