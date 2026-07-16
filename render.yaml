@@ -3,7 +3,7 @@
 # Antes, crie o banco no Neon (https://neon.tech) e tenha a connection string em mãos.
 services:
   - type: web
-    name: fablecrm
+    name: fatura-expert
     runtime: node
     plan: free # atenção: no plano free o serviço hiberna após 15 min sem uso
     region: virginia
