@@ -65,7 +65,7 @@ const App = {
     document.getElementById('app').innerHTML = `
       <div class="layout">
         <aside class="sidebar">
-          <div class="brand"><img src="/icons/icon-192.png" alt=""><div><b>FableCRM</b><span>Fatura Expert</span></div></div>
+          <div class="brand"><img src="/icons/icon-192.png" alt=""><div><b>Fatura Expert</b><span>CRM</span></div></div>
           <nav class="menu"></nav>
         </aside>
         <div class="main">
